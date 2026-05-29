@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💖 لأجمل بنوته</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Amiri', serif;
+}
+
+body{
+background:linear-gradient(180deg,#2a001f,#1a0014,#000);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+/* خلفيات */
+.screen{
+position:fixed;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+/* باسورد */
+#passwordScreen{
+background:linear-gradient(135deg,#3a0020,#8a1c4a,#ff4d88);
+z-index:10;
+}
+
+.passBox{
+background:rgba(0,0,0,0.4);
+padding:25px;
+border-radius:20px;
+}
+
+/* قلوب + نجوم */
+.heart,.star{
+position:fixed;
+pointer-events:none;
+opacity:0.7;
+}
+
+.heart{color:#ff4d88;animation:up 6s linear forwards;}
+.star{color:white;animation:up 8s linear forwards;}
+
+@keyframes up{
+0%{transform:translateY(0);opacity:0}
+20%{opacity:1}
+100%{transform:translateY(-120vh);opacity:0}
+}
+
+/* الصفحة الرئيسية */
+#main{
+display:none;
+padding:20px;
+}
+
+/* مستطيلات */
+.box{
+background:rgba(255,192,203,0.18);
+backdrop-filter:blur(10px);
+padding:15px;
+border-radius:20px;
+margin:15px 0;
+}
+
+/* Typewriter */
+.typewriter{
+min-height:120px;
+line-height:2;
+font-size:18px;
+}
+
+/* صور */
+img{
+width:100%;
+border-radius:15px;
+margin-top:10px;
+}
+
+/* كروت */
+.cards{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.card{
+height:90px;
+background:rgba(255,255,255,0.15);
+border-radius:15px;
+display:flex;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+transition:.6s;
+transform-style:preserve-3d;
+}
+
+.card.flip{
+transform:rotateY(180deg);
+}
+
+.back{
+display:none;
+}
+
+.card.flip .back{
+display:block;
+}
+
+.card.flip .front{
+display:none;
+}
+
+/* عداد */
+.counter div{
+margin:5px;
+padding:10px;
+background:rgba(255,105,180,0.25);
+border-radius:15px;
+}
+
+button{
+background:#ff4d88;
+border:none;
+padding:10px;
+border-radius:10px;
+color:white;
+margin:5px;
+cursor:pointer;
+}
+
+.hidden{display:none}
+
+/* رسائل */
+.result{
+padding:10px;
+border-radius:15px;
+margin-top:10px;
+}
+
+.pink{background:rgba(255,105,180,0.4)}
+.red{background:rgba(255,0,0,0.4)}
+
+</style>
+</head>
+
+<body>
+
+<!-- باسورد -->
+<div id="passwordScreen" class="screen">
+<div class="passBox">
+<h2>🔐 ادخلي الباسورد</h2>
+<input type="password" id="pass">
+<br>
+<button onclick="check()">دخول</button>
+</div>
+</div>
+
+<!-- المحتوى -->
+<div id="main">
+
+<audio id="music" loop>
+<source src="music.mp3">
+</audio>
+
+<!-- رسالة أولى -->
+<div class="box">
+<div id="text" class="typewriter"></div>
+</div>
+
+<!-- صور -->
+<div class="box">
+<img src="photo1.jpg">
+<p>إنتي أجمل حاجة في حياتي ❤️</p>
+
+<img src="photo2.jpg">
+<p>ضحكتك بتنسيني الدنيا ❤️</p>
+
+<img src="photo3.jpg">
+<p>إنتي راحة قلبي ❤️</p>
+</div>
+
+<!-- كروت -->
+<div class="box cards">
+
+<div class="card" onclick="flip(this)">
+<div class="front">🙋🏻‍♂ هنااااا</div>
+<div class="back">حبيت ❤️</div>
+</div>
+
+<div class="card" onclick="flip(this)">
+<div class="front">💔</div>
+<div class="back">ومش بحب</div>
+</div>
+
+<div class="card" onclick="flip(this)">
+<div class="front">😶</div>
+<div class="back">ولا هحب</div>
+</div>
+
+<div class="card" onclick="flip(this)">
+<div class="front">👑</div>
+<div class="back">حد قدك</div>
+</div>
+
+</div>
+
+<!-- رسالة طويلة -->
+<div class="box">
+<p>
+أنا معاكي في كل لحظة ❤️<br>
+مش هسيبك أبدًا ❤️<br>
+إنتي حياتي ❤️<br>
+وجودك فرق معايا ❤️<br>
+كل يوم بحبك أكتر ❤️<br>
+ومهما حصل هفضل جنبك ❤️<br>
+وعد مني ❤️<br>
+مش هتلاقي حد يحبك زَيّي ❤️
+</p>
+</div>
+
+<!-- عداد -->
+<div class="box counter" id="counter"></div>
+
+<!-- ذكريات -->
+<div class="box" onclick="showMem()">
+صفحة الذكريات ❤️
+<div id="mem" class="hidden">
+<p>🎂 10/2/2015</p>
+<p>💕 29/4/2025</p>
+</div>
+</div>
+
+<!-- سؤال -->
+<div class="box">
+<p>Do you love me?</p>
+
+<button onclick="ans('yes')">Yes</button>
+<button onclick="ans('no')">No</button>
+
+<div id="res"></div>
+</div>
+
+</div>
+
+<script>
+
+/* باسورد */
+function check(){
+if(document.getElementById("pass").value==="love"){
+document.getElementById("passwordScreen").style.display="none";
+document.getElementById("main").style.display="block";
+
+document.getElementById("music").play();
+
+type();
+}
+}
+
+/* كتابة */
+function type(){
+let text=`بحبك ❤️
+إنتي أهم حد في حياتي ❤️
+مش قادر أعيش من غيرك ❤️
+كل يوم بحبك أكتر ❤️
+ضحكتك أجمل حاجة ❤️
+إنتي الدنيا كلها ❤️`;
+
+let i=0;
+let el=document.getElementById("text");
+
+function write(){
+if(i<text.length){
+el.innerHTML+=text[i];
+i++;
+setTimeout(write,50);
+}
+}
+write();
+}
+
+/* كروت */
+function flip(c){
+c.classList.toggle("flip");
+}
+
+/* ذكريات */
+function showMem(){
+document.getElementById("mem").classList.toggle("hidden");
+}
+
+/* سؤال */
+function ans(a){
+let r=document.getElementById("res");
+
+if(a==="yes"){
+r.innerHTML="بحبك يا هبلة 🤭❤️";
+r.className="result pink";
+}else{
+r.innerHTML="اخص عليك 😡";
+r.className="result red";
+}
+}
+
+/* عداد */
+const start=new Date("2025-04-29T06:27:30");
+
+setInterval(()=>{
+let d=new Date()-start;
+
+let sec=Math.floor(d/1000);
+let min=Math.floor(sec/60);
+let hr=Math.floor(min/60);
+let day=Math.floor(hr/24);
+
+document.getElementById("counter").innerHTML=`
+<div>❤️ ${day} يوم</div>
+<div>❤️ ${hr} ساعة</div>
+<div>❤️ ${min} دقيقة</div>
+<div>❤️ ${sec} ثانية</div>
+`;
+},1000);
+
+/* قلوب ونجوم */
+function heart(){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),8000);
+}
+
+function star(){
+let s=document.createElement("div");
+s.className="star";
+s.innerHTML="✨";
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=(5+Math.random()*5)+"s";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),9000);
+}
+
+setInterval(heart,500);
+setInterval(star,900);
+
+</script>
+
+</body>
+  </html>
